@@ -20,7 +20,7 @@ import static javax.persistence.FetchType.*;
 public class Reservation {
 
     @Id @GeneratedValue
-    @Column(name = "reserve_id")
+    @Column(name = "reserve_id", updatable = false)
     private Long reserveId;
 
     @ManyToOne(fetch = LAZY)
@@ -28,22 +28,22 @@ public class Reservation {
     private User users;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "carId")
+    @JoinColumn(name = "carId", nullable = false)
     private Car cars;
 
-    @Column(name = "start_date")
+    @Column(name = "start_date", nullable = false)
     private String startDate;
 
-    @Column(name = "end_date")
+    @Column(name = "end_date" ,nullable = false)
     private String endDate;
 
-    @Column(name = "is_insuerance")
+    @Column(name = "is_insuerance", nullable = false)
     private Boolean isInsuerance;
 
-    @Column(name = "licence_info")
+    @Column(name = "licence_info", nullable = false)
     private String licenceInfo;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDateTime createdAt;
 

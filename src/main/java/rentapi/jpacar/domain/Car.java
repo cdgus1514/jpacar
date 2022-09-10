@@ -3,8 +3,10 @@ package rentapi.jpacar.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -22,14 +24,14 @@ public class Car {
     @Column(name = "car_id", updatable = false)
     private Long carId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "type")
+    @Column(name = "type", nullable = false)
     @Enumerated(EnumType.STRING)
     private CarType carType;
 
-    @Column(name = "year")
+    @Column(name = "year", nullable = false)
     private String year;
 
     @ManyToOne(fetch = LAZY)
@@ -37,9 +39,10 @@ public class Car {
     private Accident accidents;
 
     @Column(name = "useCount")
+    @ColumnDefault("0")
     private int useCount;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDateTime createdAt;
 

@@ -20,23 +20,23 @@ import static javax.persistence.FetchType.LAZY;
 public class Repaire {
 
     @Id @GeneratedValue
-    @Column(name = "repaired_id")
+    @Column(name = "repaired_id", updatable = false)
     private Long repairedId;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "accidentId")
     private Accident accidents;
 
-    @Column(name = "repaired_code")
-    private Long repairedCode;
+    @Column(name = "repaired_cost", nullable = false)
+    private Long repairedCost;
 
-    @Column(name = "repaired_start")
+    @Column(name = "repaired_start", nullable = false)
     private String reapiredStart;
 
-    @Column(name = "repaired_end")
+    @Column(name = "repaired_end", nullable = false)
     private String repairedEnd;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDateTime createdAt;
 
