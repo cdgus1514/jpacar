@@ -1,5 +1,6 @@
 package rentapi.jpacar.repository;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -42,9 +43,12 @@ class ReservationRepositoryTest {
         car.setYear("2020");
         Car saveCar = carRepository.save(car);
 
+        User findUser = userRepository.findById(saveUser.getUserId()).get();
+        Car findCar = carRepository.findById(saveCar.getCarId()).get();
+
         Reservation reservation = new Reservation();
-        reservation.setUsers(saveUser);
-        reservation.setCars(saveCar);
+        reservation.setUsers(findUser);
+        reservation.setCars(findCar);
         reservation.setIsInsuerance(false);
         reservation.setLicenceInfo("132-1234123");
         reservation.setStartDate("2022-09-12");
@@ -53,13 +57,10 @@ class ReservationRepositoryTest {
 
 
         Reservation findReserve = reservationRepository.findById(saveReserve.getReserveId()).get();
-
-
-        assertEquals(findReserve.getUsers().getUserId(), saveUser.getUserId());
-        assertEquals(findReserve.getUsers().getUserName(), saveUser.getUserName());
-
-        assertEquals(findReserve.getCars().getCarId(), saveCar.getCarId());
-        assertEquals(findReserve.getCars().getName(), saveCar.getName());
+        assertEquals(findReserve.getUsers(), findUser);
+        assertEquals(findReserve.getUsers().getUserName(), findUser.getUserName());
+        assertEquals(findReserve.getCars(), findCar);
+        assertEquals(findReserve.getCars().getName(), findCar.getName());
     }
 
     @Test
@@ -89,8 +90,6 @@ class ReservationRepositoryTest {
         reserve.setStartDate("2022-09-20");
         reserve.setEndDate("2022-09-23");
         Reservation saveR = reservationRepository.save(reserve);
-
-
 
 
         // 예약 조회

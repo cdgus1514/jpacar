@@ -49,4 +49,41 @@ public class Car {
     @Column(name = "modified_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDateTime modifiedAt;
+
+
+    /* ===== 비지니스 로직 ===== */
+    public static Car insert(Car car) {
+        Car car1 = new Car();
+        car1.setName(car.getName());
+        car1.setYear(car.getYear());
+
+        switch (car.carType) {
+            case COUPE:
+                car1.setCarType(CarType.COUPE);
+                break;
+            case SEDAN:
+                car1.setCarType(CarType.SEDAN);
+                break;
+            case SPORTS:
+                car1.setCarType(CarType.SPORTS);
+                break;
+            case SUV:
+                car1.setCarType(CarType.SUV);
+                break;
+            case WAGON:
+                car1.setCarType(CarType.WAGON);
+                break;
+            case HATCHBACK:
+                car1.setCarType(CarType.HATCHBACK);
+                break;
+            case CONVERTIBLE:
+                car1.setCarType(CarType.CONVERTIBLE);
+                break;
+            case CAMPING:
+                car1.setCarType(CarType.CAMPING);
+                break;
+        }
+
+        return car1;
+    }
 }
