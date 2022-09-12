@@ -23,5 +23,4 @@
 7. 수리내용
 
 #
-> 사용기술 >
-> java, spring boot, spring data jpa, querydsl, H2, GitHub
+> 기술스택 : java, spring boot, spring data jpa, querydsl, H2, GitHub

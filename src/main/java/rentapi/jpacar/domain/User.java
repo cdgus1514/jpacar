@@ -1,6 +1,7 @@
 package rentapi.jpacar.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -9,6 +10,8 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter @Setter
 @DynamicInsert
@@ -35,6 +38,10 @@ public class User {
     @Column(name = "modified_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDateTime modifiedAt;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "users")
+    private List<Reservation> reservationList = new ArrayList<>();
 
 
     /* ===== 비지니스 로직 ===== */

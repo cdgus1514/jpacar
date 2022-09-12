@@ -93,15 +93,11 @@ class ReservationRepositoryTest {
 
 
         // 예약 조회
-        List<Reservation> findQuerydslR = reserveQueryRepository.findReserve(saveR.getReserveId());
+        List<ReservationDto> findQuerydslR = reserveQueryRepository.findReserve(saveR.getReserveId());
 
         for (int i = 0; i < findQuerydslR.size(); i++) {
             System.out.println(findQuerydslR.get(i).getReserveId());
             System.out.println(findQuerydslR.get(i).getLicenceInfo());
-            System.out.println(findQuerydslR.get(i).getUsers().getUserName());
-            System.out.println(findQuerydslR.get(i).getUsers().getUserLevel());
-            System.out.println(findQuerydslR.get(i).getCars().getName());
-            System.out.println(findQuerydslR.get(i).getCars().getCarType());
         }
     }
 }
