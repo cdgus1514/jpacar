@@ -1,16 +1,13 @@
 package rentapi.jpacar.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rentapi.jpacar.domain.Car;
 import rentapi.jpacar.domain.Reservation;
 import rentapi.jpacar.domain.ReservationDto;
-import rentapi.jpacar.domain.User;
 import rentapi.jpacar.service.ReserveService;
 
 import java.util.List;
@@ -31,12 +28,22 @@ public class ReserveController {
     }
 
     @GetMapping("/reserve/{no}")
-    public ResponseEntity<List<ReservationDto>> findReserve(@PathVariable("no") long reserveId) {
+    public ResponseEntity<List<Reservation>> findReserve(@PathVariable("no") long reserveId) {
         return ResponseEntity.ok(reserveService.findReserve(reserveId));
     }
 
+    @GetMapping("/reserve/dto/{no}")
+    public ResponseEntity<List<ReservationDto>> findReserveDto(@PathVariable("no") long reserveId) {
+        return ResponseEntity.ok(reserveService.findReserveDto(reserveId));
+    }
+
     @GetMapping("/reserves")
-    public ResponseEntity<List<ReservationDto>> listReserve() {
+    public ResponseEntity<List<Reservation>> listReserve() {
         return ResponseEntity.ok(reserveService.findAllReserve());
+    }
+
+    @GetMapping("/reserves/dto")
+    public ResponseEntity<List<ReservationDto>> listReserveDto() {
+        return ResponseEntity.ok(reserveService.findAllReserveDto());
     }
 }

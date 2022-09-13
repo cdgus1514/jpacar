@@ -1,13 +1,9 @@
 package rentapi.jpacar.repository;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.Rollback;
-import rentapi.jpacar.QuerydslConfig;
 import rentapi.jpacar.domain.*;
 import rentapi.jpacar.repository.querydsl.ReserveQueryRepository;
 
@@ -93,7 +89,7 @@ class ReservationRepositoryTest {
 
 
         // 예약 조회
-        List<ReservationDto> findQuerydslR = reserveQueryRepository.findReserve(saveR.getReserveId());
+        List<ReservationDto> findQuerydslR = reserveQueryRepository.findReserveDto(saveR.getReserveId());
 
         for (int i = 0; i < findQuerydslR.size(); i++) {
             System.out.println(findQuerydslR.get(i).getReserveId());

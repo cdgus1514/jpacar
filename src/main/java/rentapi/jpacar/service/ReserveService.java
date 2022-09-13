@@ -1,7 +1,6 @@
 package rentapi.jpacar.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import rentapi.jpacar.repository.UserRepository;
 import rentapi.jpacar.repository.querydsl.ReserveQueryRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -48,11 +46,19 @@ public class ReserveService {
         return result.getReserveId();
     }
 
-    public List<ReservationDto> findReserve(long reserveId) {
+    public List<Reservation> findReserve(long reserveId) {
         return reserveQueryRepository.findReserve(reserveId);
     }
 
-    public List<ReservationDto> findAllReserve() {
+    public List<ReservationDto> findReserveDto(long reserveId) {
+        return reserveQueryRepository.findReserveDto(reserveId);
+    }
+
+    public List<Reservation> findAllReserve() {
         return reserveQueryRepository.findReserve(0L);
+    }
+
+    public List<ReservationDto> findAllReserveDto() {
+        return reserveQueryRepository.findReserveDto(0L);
     }
 }

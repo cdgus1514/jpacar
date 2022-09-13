@@ -24,12 +24,10 @@ public class Reservation {
     @Column(name = "reserve_id", updatable = false)
     private Long reserveId;
 
-    @JsonIgnore
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "userId")
     private User users;
 
-    @JsonIgnore
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "carId", nullable = false)
     private Car cars;
